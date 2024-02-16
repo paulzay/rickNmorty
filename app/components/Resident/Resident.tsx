@@ -7,10 +7,10 @@ function Resident({ name, image, status, id }: ResidentType) {
   const router = useRouter();
 
   return (
-    <div className='flex flex-col items-center pb-5 cursor-pointer' onClick={() => router.push(`/${name}/id${id}`)}>
-      <Image src={image} alt={''} width={100} height={100} />
+    <div className='flex flex-col items-center pb-5 cursor-pointer' onClick={() => router.push(`/character?id=${id}`)}>
+      <Image src={image} alt={''} width={250} height={250} />
       <p>{name}</p>
-      <p>{status}</p>
+      <p>Status: {status}</p>
     </div>
   )
 }

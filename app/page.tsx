@@ -1,4 +1,5 @@
 "use client"
+
 import Search from "./components/Search/Search";
 import List from "./components/List/List";
 import { useEffect, useState } from 'react';
@@ -7,7 +8,8 @@ import { useQuery } from '@apollo/client';
 
 export default function Home() {
   const { loading, data } = useQuery(LOAD_LOCATIONS);
-  const [locations, setLocations] = useState<Location[]>([]);
+  const [locations, setLocations] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     if (data) {
@@ -18,9 +20,23 @@ export default function Home() {
   return (
     <main className="h-screen w-screen bg-white">
       <nav className="bg-black p-5">
-        <Search />
+        <Search searchText={query} setSearchText={setQuery} />
       </nav>
-      {loading ? <p>Loading</p> : <List locations={locations} />}
+      {loading ? <p>Loading</p> : <List locations={locations} query={query} />}
     </main>
   );
 }
+
+// const useDebounce = (value: any, delay: number) => {
+//   const [debounceValue, setDebounceValue] = useState(value)
+
+//   useEffect(() => {
+//     const timeoutId = setTimeout(() => {
+//       setDebounceValue(value);
+//     }, delay);
+//     return () => {
+//       clearTimeout(timeoutId)
+//     }
+//   }, [value, delay])
+//   return debounceValue;
+// }

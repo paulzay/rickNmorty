@@ -6,8 +6,8 @@ function Residents({ residents }: ResidentsType) {
 
   return (
     <div className='grid grid-cols-6 pt-5'>
-      {residents.map((resident, idx) => (
-        <Resident name={resident.name} image={resident.image} status={resident.status} key={resident.id} />
+      {residents.map((resident) => (
+        <Resident name={resident.name} image={resident.image} status={resident.status} key={resident.id} id={resident.id} />
       ))}
     </div>
   )

@@ -2,7 +2,7 @@ export type ResidentType = {
   status: string,
   image: string,
   name: string,
-  id?: string,
+  id: string,
 }
 
 export type ResidentsType = {

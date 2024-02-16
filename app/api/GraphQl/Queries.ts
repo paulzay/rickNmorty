@@ -8,10 +8,25 @@ query {
         status,
         name,
         image
-        id
+        id,
+        episode{
+          episode,
+          name
+        }
       }
       type
-    } 
+    }
+    
   }
 }
+`
+
+export const LOAD_CHARACTER = gql `
+  query($id: ID!) {
+    character(id: $id) {
+      name,
+      image,
+      species
+    }
+  }
 `
