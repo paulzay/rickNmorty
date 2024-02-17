@@ -9,23 +9,38 @@ import { useSearchParams } from 'next/navigation';
 function Character() {
   const searchParams = useSearchParams();
   const [note, setNote] = useState('');
+  const [disabled, setDisabled] = useState(true)
 
   const { data, loading } = useQuery(LOAD_CHARACTER, {
     variables: { id: searchParams.get('id') }
   });
 
   useEffect(() => {
-  }, [data]);
+    const n = localStorage.getItem(searchParams.get('id') as string);
+    if (n !== null) {
+      setNote(n)
+    }
+    setDisabled(note.length !== 0)
+  }, [note, searchParams]);
+
+  function handleSave() {
+    localStorage.setItem(searchParams.get('id') as string, note);
+    setNote('');
+  }
 
   return (
-    <div className='bg-'>
+    <div className='bg-white text-black h-screen'>
       {loading ? <p>Loading...</p> :
-        <div className=''>
-          <p>{data.character.name}</p>
-          <Image src={data?.character.image} alt="l" width={300} height={300} />
-          <textarea placeholder='Enter note' value={note} onChange={(e) => setNote(e.target.value)}
-            className='text-black' />
-          <button className=''>Save Note</button>
+        <div className='flex flex-row'>
+          <div>
+            <p>{data.character.name}</p>
+            <Image src={data?.character.image} alt="l" width={300} height={300} />
+          </div>
+          <div className='flex flex-col'>
+            <textarea placeholder='Enter note' value={note} onChange={(e) => setNote(e.target.value)}
+              className='text-black border-black border border-solid border-2 p-2' />
+            <button className='bg-orange-500 p-4 rounded-sm' onClick={handleSave} disabled={disabled}>Save Note</button>
+          </div>
         </div>
       }
     </div>

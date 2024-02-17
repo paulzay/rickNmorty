@@ -1,10 +1,10 @@
 import React from 'react'
-import { ResidentsType } from '@/app/types';
+import { ResidentType } from '@/app/types';
 import Residents from '../Residents/Residents';
 
 interface CardProps {
   name: string;
-  residents: ResidentsType;
+  residents: ResidentType[];
   type: string;
 }
 

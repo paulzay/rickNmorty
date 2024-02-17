@@ -12,5 +12,5 @@ export type ResidentsType = {
 export type Location = {
   name: string;
   type: string;
-  residents: ResidentsType;
+  residents: ResidentType[];
 }
