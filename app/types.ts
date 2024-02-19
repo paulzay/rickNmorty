@@ -11,6 +11,10 @@ export type ResidentType = {
   episode: EpisodeType[],
 }
 
+export type ResidentsType = {
+  residents: ResidentType[]
+}
+
 export type Location = {
   name: string;
   type: string;

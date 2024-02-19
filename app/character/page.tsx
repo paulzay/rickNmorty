@@ -21,11 +21,10 @@ function Character() {
     if (n !== null) {
       setNote(n)
     }
-    setDisabled(note.length !== 0)
   }, [searchParams]);
 
   useEffect(() => {
-
+    setDisabled(note.length !== 0)
   }, [note]);
 
   function handleSave() {
