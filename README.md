@@ -13,6 +13,7 @@
 - Apollo Client
 - Tailwind CSS
 - Typescript
+- LocalStorage
 
 ## Screenshot
 ![Screenshot 2024-02-19 at 11 06 53](https://github.com/paulzay/rickNmorty/assets/29974825/bfd344c9-3989-43a9-9ab9-348ab467fb19)
