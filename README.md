@@ -2,7 +2,7 @@
 
 > This is a webapp to fetch a list of all the locations in the show, view/edit character details and search for locations, filter location by episode and character
 
-[Live]()
+[Live](https://rick-nmorty-eta.vercel.app/)
 
 ## Project
 
