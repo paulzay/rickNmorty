@@ -1,12 +1,14 @@
+export type EpisodeType = {
+  name: string,
+  episode: string,
+}
+
 export type ResidentType = {
   status: string,
   image: string,
   name: string,
   id: string,
-}
-
-export type ResidentsType = {
-  residents: ResidentType[]
+  episode: EpisodeType[],
 }
 
 export type Location = {
