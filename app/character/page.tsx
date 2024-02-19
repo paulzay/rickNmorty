@@ -43,7 +43,7 @@ function Character() {
             <p className='text-center p-2'>{data.character.name}</p>
             <Image src={data?.character.image} alt="l" width={500} height={500} className='mt-2 mb-2' />
             {
-              !addNote && <button className='bg-orange-400 p-4 rounded-sm' onClick={() => setAddNote(true)} >Add Note</button>
+              !addNote && <button className='bg-orange-400 p-4 rounded-sm' onClick={() => setAddNote(true)} >{note.length > 0 ? "Edit Note" : "Add Note"}</button>
             }
           </div>
           {
