@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 function Character() {
   const searchParams = useSearchParams();
   const [note, setNote] = useState('');
+  const [addNote, setAddNote] = useState(false)
   const [disabled, setDisabled] = useState(true)
 
   const { data, loading } = useQuery(LOAD_CHARACTER, {
@@ -21,11 +22,16 @@ function Character() {
       setNote(n)
     }
     setDisabled(note.length !== 0)
-  }, [note, searchParams]);
+  }, [searchParams]);
+
+  useEffect(() => {
+
+  }, [note]);
 
   function handleSave() {
     localStorage.setItem(searchParams.get('id') as string, note);
     setNote('');
+    window.location.reload()
   }
 
   return (
@@ -35,12 +41,17 @@ function Character() {
           <div>
             <p>{data.character.name}</p>
             <Image src={data?.character.image} alt="l" width={300} height={300} />
+            {
+              !addNote && <button className='bg-orange-400 p-4 rounded-sm' onClick={() => setAddNote(true)} >Add Note</button>
+            }
           </div>
-          <div className='flex flex-col'>
-            <textarea placeholder='Enter note' value={note} onChange={(e) => setNote(e.target.value)}
-              className='text-black border-black border border-solid border-2 p-2' />
-            <button className='bg-orange-500 p-4 rounded-sm' onClick={handleSave} disabled={disabled}>Save Note</button>
-          </div>
+          {
+            addNote && <div className='flex flex-col'>
+              <textarea placeholder='Enter note' value={note} onChange={(e) => setNote(e.target.value)}
+                className='text-black border-black border border-solid border-2 p-2' />
+              <button className='bg-orange-500 p-4 rounded-sm' onClick={handleSave} disabled={disabled}>Save Note</button>
+            </div>
+          }
         </div>
       }
     </div>
