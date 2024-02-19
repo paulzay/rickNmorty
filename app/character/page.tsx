@@ -1,10 +1,12 @@
 "use client"
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { LOAD_CHARACTER } from "@/app/api/GraphQl/Queries";
 import { useQuery } from '@apollo/client';
 import { useSearchParams } from 'next/navigation';
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 function Character() {
   const searchParams = useSearchParams();
@@ -15,6 +17,10 @@ function Character() {
   const { data, loading } = useQuery(LOAD_CHARACTER, {
     variables: { id: searchParams.get('id') }
   });
+
+  useEffect(() => {
+    setDisabled(note.length !== 0)
+  }, [note]);
 
   useEffect(() => {
     const n = localStorage.getItem(searchParams.get('id') as string);
@@ -57,4 +63,9 @@ function Character() {
   )
 }
 
-export default Character
+export default function CharacterPage() {
+  return (
+    <Suspense>
+      <Character />
+    </Suspense>)
+}
