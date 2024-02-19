@@ -19,7 +19,7 @@ function Character() {
   });
 
   useEffect(() => {
-    setDisabled(note.length !== 0)
+    setDisabled(note.length === 0)
   }, [note]);
 
   useEffect(() => {
@@ -28,10 +28,6 @@ function Character() {
       setNote(n)
     }
   }, [searchParams]);
-
-  useEffect(() => {
-    setDisabled(note.length !== 0)
-  }, [note]);
 
   function handleSave() {
     localStorage.setItem(searchParams.get('id') as string, note);
@@ -42,10 +38,10 @@ function Character() {
   return (
     <div className='bg-white text-black h-screen'>
       {loading ? <p>Loading...</p> :
-        <div className='flex flex-row'>
+        <div className='flex flex-col items-center p-5'>
           <div>
-            <p>{data.character.name}</p>
-            <Image src={data?.character.image} alt="l" width={300} height={300} />
+            <p className='text-center p-2'>{data.character.name}</p>
+            <Image src={data?.character.image} alt="l" width={500} height={500} className='mt-2 mb-2' />
             {
               !addNote && <button className='bg-orange-400 p-4 rounded-sm' onClick={() => setAddNote(true)} >Add Note</button>
             }
@@ -54,7 +50,7 @@ function Character() {
             addNote && <div className='flex flex-col'>
               <textarea placeholder='Enter note' value={note} onChange={(e) => setNote(e.target.value)}
                 className='text-black border-black border border-solid border-2 p-2' />
-              <button className='bg-orange-500 p-4 rounded-sm' onClick={handleSave} disabled={disabled}>Save Note</button>
+              <button className='bg-orange-500 p-4 rounded-sm mt-2' onClick={handleSave} disabled={disabled}>Save Note</button>
             </div>
           }
         </div>
